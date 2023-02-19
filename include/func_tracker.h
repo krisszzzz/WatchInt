@@ -9,6 +9,7 @@
 class FuncTracker
 {
 public:
+
     FuncTracker( const char* func_name )
     {
         Logger* logger = Logger::getInstance();

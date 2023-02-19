@@ -5,11 +5,14 @@
 #include <string.h>
 #include <string>
 
-#define SET_WATCHINT_BY_VALUE( name, value ) \
-    WatchInt name( value, __LINE__, __PRETTY_FUNCTION__, #name )
+#define DEF_WATCHINT_BY_VALUE( name, value ) \
+    WatchInt name( value, #name )
 
-#define SET_WATCHINT_BY_VAR( name, var ) \
-    WatchInt name( var, __LINE__, __PRETTY_FUNCTION__, #name )
+#define DEF_WATCHINT_BY_VAR( name, var ) \
+    WatchInt name( var, #name )
+
+#define ASSIGN_WATCHINT( name, var ) \
+    name.operator=( var, __LINE__, __PRETTY_FUNCTION__, #name )
 
 
 class WatchInt
@@ -17,25 +20,30 @@ class WatchInt
 public:
 
     WatchInt( int value,
-              int line,
-              const char* function,
               const char* var_name );
 
     WatchInt& operator=( const WatchInt& that );
 
     WatchInt( const WatchInt& that,
-              int line = 0,
-              const char* function = nullptr,
               const char* var_name = nullptr );
 
     WatchInt& operator+=( const WatchInt& that );
     WatchInt operator+( const WatchInt& that );
 
+    int getValue() const
+    {
+        return value_;
+    }
+
+    // std::string& getName()
+    // {
+    //     return name_;
+    // }
+
 private:
     int value_;
-    std::string name_;
+    // std::string name_;
     // History of created variable
-    std::string history_;
 };
 
 #endif

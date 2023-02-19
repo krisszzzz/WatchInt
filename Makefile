@@ -23,7 +23,7 @@ $(OBJ_DIR)/main.o: main.cc
 
 clean:
 	rm -rf obj
-	rm gui
+	rm log 
 
 
 
